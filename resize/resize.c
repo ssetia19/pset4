@@ -80,10 +80,39 @@ int main(int argc, char *argv[])
     RGBTRIPLE *buffer = malloc(sizeof(RGBTRIPLE) * (bi.biWidth));
 
     
-   
+    for (int i = 0, biHeight = abs(originalHeight); i < biHeight; i++)
+    {
+        int tracker = 0;
+       
+        for (int j = 0; j < originalWidth; j++)
+        {
+           
+            RGBTRIPLE triple;
+            
+           
+            fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+            
+           
+            for(int count = 0; count < scale; count++)
+            {
+                *(buffer+(tracker)) = triple;
+                tracker++;
+            }
+        }
             
        
-      
+        fseek(inptr, originalPadding, SEEK_CUR);
+
+       
+           for(int r = 0; r < scale; r++)
+           {
+                fwrite((buffer), sizeof(RGBTRIPLE), bi.biWidth, outptr);
+
+               
+                for (int k = 0; k < padding; k++)
+                    fputc(0x00, outptr);
+           }        
+    }
 
    
     free(buffer);
