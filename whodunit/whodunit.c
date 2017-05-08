@@ -93,5 +93,4 @@
     fclose(outptr);
 
     // success
-    return 0;
-}
+   
