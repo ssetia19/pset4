@@ -22,21 +22,21 @@ int main(void)
    
    
     FILE* temp = NULL; 
-    
+     // until end of file is reached
     while (!feof(file))
     {
        
-        
+        // check first couple of sequence of the jpg
         if (jpeg[0] == 0xff && jpeg[1] == 0xd8 && jpeg[2] == 0xff && (jpeg[3] == 0xe0 || jpeg[3] == 0xe1))
         {
-         
+            // if already exist, then close file
             if (temp != NULL)
             {
                 fclose(temp);
                 
             }
             
-           
+            // label the files with three digits
             sprintf(fname, "%03d.jpg", counter);
             
             // next file in line
@@ -50,7 +50,7 @@ int main(void)
         }
         else if (counter > 0)
         {
-            
+            // put jpg into temp
             fwrite(jpeg, sizeof(jpeg), 1, temp);            
             
         }
