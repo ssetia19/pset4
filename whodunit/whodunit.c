@@ -37,24 +37,23 @@
         return 4;
     }
 
-    // write outfile's BITMAPFILEHEADER
+   
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
 
-    // write outfile's BITMAPINFOHEADER
+   
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
-    // determine padding for scanlines
     int padding =  (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
 
-    // iterate over infile's scanlines
+   
     for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
     {
-        // iterate over pixels in scanline
+        
         for (int j = 0; j < bi.biWidth; j++)
         {
             // temporary storage
             RGBTRIPLE triple;
-
+            // rgb is readed
             // read RGB triple from infile
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
             //if color is red then change red to 0x00
