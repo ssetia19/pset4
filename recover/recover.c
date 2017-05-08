@@ -39,13 +39,13 @@ int main(void)
            
             sprintf(fname, "%03d.jpg", counter);
             
-         
+            // next file in line
             temp = fopen(fname, "w");
             
-           
+            // bump the counter up
             counter++;
             
-            
+            // new file with jpeg
             fwrite(jpeg, sizeof(jpeg), 1, temp);
         }
         else if (counter > 0)
@@ -60,7 +60,7 @@ int main(void)
     }
   
     
-   
+    // close the file
     fclose(file);
 	return 0;
 }
